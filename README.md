@@ -1,11 +1,12 @@
 # Express.js Authentication App
 
-Cette application est un exemple simple d'authentification avec Express.js. Elle permet aux utilisateurs de s'enregistrer, de se connecter et d'accéder à une page d'accueil protégée si ils sont connectés.
+Cette application est un exemple simple d'authentification avec Express.js. Elle permet aux utilisateurs de s'enregistrer, de se connecter et d'accéder à une page d'accueil protégée s'ils sont connectés.
 
 ## Fonctionnalités
 
-- Enregistrement des utilisateurs avec une vérification de la politique de mot de passe.
-- Connexion des utilisateurs avec vérification des mots de passe hachés.
+- Enregistrement des utilisateurs avec vérification de la politique de mot de passe.
+- Connexion des utilisateurs avec vérification des mots de passe cryptés.
+- Stockage sécurisé des informations de l'utilisateur (prénom, nom de famille, numéro de téléphone) avec chiffrement.
 - Accès protégé à une page d'accueil.
 - Déconnexion des utilisateurs.
 
@@ -42,6 +43,7 @@ Cette application est un exemple simple d'authentification avec Express.js. Elle
 ## Structure des fichiers
 
 - `index.js` : Le fichier principal du serveur Express.js.
+- `database.js` : Le fichier de configuration et d'initialisation de la base de données SQLite.
 - `public/css/styles.css` : Le fichier de styles CSS pour les pages HTML.
 
 ## Utilisation
@@ -49,12 +51,12 @@ Cette application est un exemple simple d'authentification avec Express.js. Elle
 ### Enregistrement
 
 1. Accédez à `http://localhost:3000/register`.
-2. Remplissez le formulaire d'enregistrement avec un nom d'utilisateur et un mot de passe qui respecte la politique de mot de passe :
-    - Minimum de 8 caractères.
-    - Au moins une majuscule.
-    - Au moins une minuscule.
-    - Au moins un chiffre.
-    - Au moins un caractère spécial.
+2. Remplissez le formulaire d'enregistrement avec les informations suivantes :
+    - Nom d'utilisateur
+    - Mot de passe (qui respecte la politique de mot de passe)
+    - Prénom
+    - Nom de famille
+    - Numéro de téléphone
 3. Cliquez sur "Register".
 
 ### Connexion
@@ -76,6 +78,7 @@ Cette application est un exemple simple d'authentification avec Express.js. Elle
 
 - Les mots de passe sont hachés avec `bcryptjs` avant d'être stockés.
 - La politique de mot de passe est vérifiée avant d'accepter un nouvel utilisateur.
+- Les informations sensibles (prénom, nom de famille, numéro de téléphone) sont chiffrées avec `crypto-js` avant d'être stockées.
 - Les routes sensibles sont protégées par des sessions.
 
 ## Dépendances
@@ -84,3 +87,6 @@ Cette application est un exemple simple d'authentification avec Express.js. Elle
 - `express-session` : Middleware de gestion des sessions pour Express.
 - `body-parser` : Middleware pour parser les données des formulaires.
 - `bcryptjs` : Bibliothèque pour le hachage des mots de passe.
+- `crypto-js` : Bibliothèque pour le chiffrement des données.
+- `sqlite3` : Module SQLite pour Node.js.
+
